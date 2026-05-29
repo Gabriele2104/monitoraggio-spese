@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="it-IT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>monitoraggio spese</title>
+  </head>
+  <body>
+    <section class="container">
+      <header>
+        <h1>Monitora le tue spese quotidiane</h1>
+      </header>
+      <main>
+        <section class="impostaBudget">
+          <p>Inserisci il tuo budget (*)</p>
+          <input
+            type="number"
+            id="inputBudget"
+            placeholder="Inserire somma"
+            step="00.1"
+          />
+          <label for="categoriaEntrata">Scegli il tipo di entrata (*)</label>
+          <select name="categoriaEntrata" id="categoriaEntrata" class="menu">
+            <option value="">Seleziona una categoria</option>
+            <option value="Stipendio">Stipendio</option>
+            <option value="Altro">Altro</option>
+          </select>
+          <button id="btnBudget">Imposta budget</button>
+        </section>
+        <section class="impostaBudget">
+          <p>Inserisci le tue spese (*)</p>
+          <input
+            type="text"
+            id="descrizioneSpesa"
+            placeholder="Descrivi la spesa effettuata"
+            autocomplete="off"
+          />
+          <input
+            type="number"
+            id="inputSpesa"
+            placeholder="Inserisci somma spesa"
+            step="00.1"
+          />
+          <label for="categoriaSpese"
+            >Scegli la categoria della tua spesa (*)</label
+          >
+          <select name="categorie" id="categoriaSpese" class="menu">
+            <option value="">Seleziona una categoria</option>
+            <option value="Alimentari">Alimentari</option>
+            <option value="Casa">Casa</option>
+            <option value="Bollette">Bollette</option>
+            <option value="Trasporti">Trasporti</option>
+            <option value="Rate e Finanziamenti">Rate e Finanziamenti</option>
+            <option value="Salute">Salute</option>
+            <option value="Abbigliamento">Abbigliamento</option>
+            <option value="Desideri">Desideri</option>
+            <option value="Sport">Sport</option>
+            <option value="Abbonamenti">Abbonamenti</option>
+            <option value="Altro">Altro</option>
+          </select>
+          <button id="btnSpesa">Aggiungi spesa</button>
+        </section>
+      </main>
+      <section class="tabella">
+        <h2>Il tuo budget attuale</h2>
+      </section>
+      <table class="importo">
+        <thead>
+          <tr>
+            <th>
+              <p>Il tuo budget</p>
+            </th>
+            <th>
+              <p>Le tue uscite</p>
+            </th>
+            <th>
+              <p>Il tuo saldo</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p id="visualizzaBudget" class="budget"></p>
+            </td>
+            <td>
+              <p id="visualizzaSpesa" class="budget"></p>
+            </td>
+            <td>
+              <p id="visualizzaSaldo" class="budget"></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <section class="transazioni">
+        <h2>Tabella transazioni</h2>
+      </section>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Categoria</th>
+            <th>Descrizione</th>
+            <th>Importo</th>
+          </tr>
+        </thead>
+        <tbody id="transazioni"></tbody>
+      </table>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
