@@ -9,23 +9,26 @@ let usciteTotali = document.querySelector("#visualizzaSpesa");
 let visualizzaSaldo = document.querySelector("#visualizzaSaldo");
 let transazioni = document.querySelector("#transazioni");
 let categoriaEntrata = document.querySelector("#categoriaEntrata");
+let resetMese = document.querySelector("#btnReset");
+let popup = document.querySelector("#scelta");
 let uscite = [];
 
 impostaBudget.addEventListener("click", () => {
   if (inputBudget.value == "" || categoriaEntrata.value == "") {
     visualizzaBudget.innerHTML = 0 + " €";
-    usciteTotali.innerHTML = "Nessuna uscita";
+    usciteTotali.innerHTML = 0 + " €";
     visualizzaSaldo.innerHTML = 0 + " €";
     alert("Devi riempire tutti i campi obbligatori (*)");
     return;
   } else {
     visualizzaBudget.innerHTML = inputBudget.value + " €";
-    usciteTotali.innerHTML = "Nessuna uscita";
+    usciteTotali.innerHTML = 0 + " €";
     visualizzaSaldo.innerHTML = inputBudget.value + " €";
     visualizzaBudget.classList.add("entrataBudget");
     visualizzaSaldo.classList.add("usciteNormali");
     inserimentoBudgetTabella();
   }
+  
 });
 
 impostaSpesa.addEventListener("click", () => {
@@ -36,7 +39,7 @@ impostaSpesa.addEventListener("click", () => {
   ) {
     alert("Devi riempire tutti i campi obbligatori (*)");
     visualizzaBudget.innerHTML = inputBudget.value + " €";
-    usciteTotali.innerHTML = "Nessuna uscita";
+    usciteTotali.innerHTML = 0 + " €";
     visualizzaSaldo.innerHTML = inputBudget.value + " €";
     return;
   } else {
@@ -107,4 +110,54 @@ function inserimentoBudgetTabella() {
               <td class="entrataBudget">€${entrata.entrata}</td>
           </tr>
       `;
+}
+
+resetMese.addEventListener("click", () => {
+  creaPopup();
+})
+
+function creaPopup(){
+  const div = document.createElement("div");
+  const h2 = document.createElement("h2");
+  const sectionButtons = document.createElement("section");
+  const btnGreen = document.createElement("button");
+  const btnRed = document.createElement("button");
+  const body = document.querySelector("body");
+
+  h2.textContent = "Sei sicuro di svuotare tutti i campi?";
+  btnGreen.textContent = "No";
+  btnRed.textContent = "Si";
+
+  div.classList.add("popup");
+  h2.classList.add("h2Popup");
+  sectionButtons.classList.add("sectionButtons");
+  btnGreen.classList.add("btnGreen");
+  btnRed.classList.add("btnRed");
+  body.classList.add("popupBody");
+
+  div.appendChild(h2);
+  div.appendChild(sectionButtons);
+  sectionButtons.appendChild(btnGreen);
+  sectionButtons.appendChild(btnRed);
+  popup.appendChild(div);
+
+  btnGreen.addEventListener("click", () => {
+    div.style.display = "none";
+    body.classList.remove("popupBody");
+  })
+  btnRed.addEventListener("click", () =>{
+    svuotaCampi();
+    div.style.display = "none";
+    body.classList.remove("popupBody");
+  })
+}
+
+function svuotaCampi(){
+  inputBudget.value = "";
+  visualizzaBudget.textContent = 0 + " €";
+  descrizioneSpesa.value = "";
+  inputSpesa.value = "";
+  usciteTotali.textContent = 0 + " €";
+  visualizzaSaldo.textContent = 0 + " €";
+  transazioni.textContent = "";
 }
