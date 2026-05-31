@@ -165,13 +165,13 @@ td {
   color: red;
 }
 
-footer{
+footer {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.buttonReset{
+.buttonReset {
   background-color: red;
   color: white;
   border: none;
@@ -180,7 +180,7 @@ footer{
   padding: 10px;
   font-size: 18px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   letter-spacing: 1px;
 }
 
@@ -199,19 +199,18 @@ footer{
   justify-content: space-between;
 }
 
-.h2Popup{
+.h2Popup {
   font-size: 1.6em;
   color: black;
   text-align: center;
 }
 
-.sectionButtons{
+.sectionButtons {
   display: flex;
   justify-content: space-between;
-  
 }
 
-.btnGreen{
+.btnGreen {
   font-size: 1.2em;
   padding: 10px;
   cursor: pointer;
@@ -222,7 +221,7 @@ footer{
   border-radius: 8px;
 }
 
-.btnRed{
+.btnRed {
   font-size: 1.2em;
   padding: 10px;
   cursor: pointer;
@@ -233,9 +232,24 @@ footer{
   border-radius: 8px;
 }
 
-.popupBody{
-  overflow: hidden;
+.sectionButtonCampiVuoti {
+  display: flex;
+  justify-content: center;
+}
 
+.btnGreenCampiVuoti {
+  font-size: 1.2em;
+  padding: 10px;
+  cursor: pointer;
+  background-color: green;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+}
+
+.popupBody {
+  overflow: hidden;
 }
 
 .popupBody::before {
