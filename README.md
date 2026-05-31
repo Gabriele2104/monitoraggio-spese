@@ -23,3 +23,17 @@ Le uscite e il saldo cambiano colore in base alla percentuale di uscite e di sal
 Colore verde = uscite e saldo nella norma. <br>
 Colore arancione = le uscite iniziano a diventare alte e il saldo inizia ad essere basso. <br>
 Colore rosso = le uscite sono estremamente alte per il budget a disposizione e il saldo è estremamente basso da rischiare di andare in negativo.
+
+## Screenshots del progetto in tutte le sue fasi 
+
+### Come appare in prima pagina
+![Prima pagina](immagini%20progetto/Prima%20pagina.png)
+
+### Come appare la tabella delle transazioni una volta inseriti tutti i campi
+![Progetto completo](immagini%20progetto/Progetto%20completo.png)
+
+### Se premuto il tasto Reset con i campi vuoti
+![Popup campi vuoti](immagini%20progetto/Popup%20campi%20vuoti.png)
+
+### Se premuto il tasto Reset con i campi o alcuni campi inseriti
+![Scelta di svuotare i campi](immagini%20progetto/Scelta%20di%20svuotare%20i%20campi.png)
