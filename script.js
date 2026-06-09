@@ -204,6 +204,7 @@ function creaPopupCampiVuoti() {
 
   div.classList.add("popup");
   h2.classList.add("h2Popup");
+  sectionButtons.classList.add("sectionButtonCampiVuoti");
   btnGreen.classList.add("btnGreenCampiVuoti");
   body.classList.add("popupBody");
 
