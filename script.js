@@ -12,6 +12,8 @@ let categoriaEntrata = document.querySelector("#categoriaEntrata");
 let resetMese = document.querySelector("#btnReset");
 let popup = document.querySelector("#scelta");
 let uscite = [];
+const budgetSalvato = localStorage.getItem("entrataMensile");
+const speseSalvate = localStorage.getItem("speseUscite");
 
 impostaBudget.addEventListener("click", () => {
   if (inputBudget.value == "" || categoriaEntrata.value == "") {
@@ -28,8 +30,13 @@ impostaBudget.addEventListener("click", () => {
     visualizzaSaldo.classList.add("usciteNormali");
     inserimentoBudgetTabella();
   }
-  
+  localStorage.setItem("entrataMensile", inputBudget.value);
 });
+
+if (budgetSalvato) {
+  visualizzaBudget.innerHTML = budgetSalvato + " €";
+  visualizzaSaldo.innerHTML = budgetSalvato + " €";
+}
 
 impostaSpesa.addEventListener("click", () => {
   if (
@@ -48,10 +55,11 @@ impostaSpesa.addEventListener("click", () => {
     let saldoDisponibile = 0;
     let spesaAttuale = 0;
     let totaleUscite = 0;
-    uscite.push(Number(inputSpesa.value));
+    creaTabellaTransazioni();
     totaleUscite = uscite.reduce(
-      (spesaCorrente, valoreCorrente) => spesaCorrente + valoreCorrente,
-      spesaAttuale,
+      (spesaCorrente, valoreCorrente) =>
+        spesaCorrente + Number(valoreCorrente.importo),
+      0,
     );
     saldoDisponibile = Number(inputBudget.value) - totaleUscite;
     usciteTotali.innerHTML = totaleUscite + " €";
@@ -72,9 +80,32 @@ impostaSpesa.addEventListener("click", () => {
     } else {
       visualizzaSaldo.classList.add("usciteAlte");
     }
-    creaTabellaTransazioni();
   }
+  localStorage.setItem("speseUscite", JSON.stringify(uscite));
 });
+
+if (speseSalvate) {
+  const arraySpese = JSON.parse(speseSalvate);
+  uscite = arraySpese;
+  arraySpese.forEach((transazione) => {
+    transazioni.innerHTML += `
+          <tr>
+              <td>${transazione.data}</td>
+              <td>${transazione.categoria}</td>
+              <td>${transazione.descrizione}</td>
+              <td class="uscitaBudget">€${transazione.importo}</td>
+          </tr>
+      `;
+  });
+  const speseTotali = arraySpese.reduce(
+    (spesaCorrente, valoreCorrente) =>
+      spesaCorrente + Number(valoreCorrente.importo),
+    0,
+  );
+
+  usciteTotali.innerHTML = speseTotali + " €";
+  visualizzaSaldo.innerHTML = Number(budgetSalvato) - speseTotali + " €";
+}
 
 function creaTabellaTransazioni() {
   const spesa = {
@@ -92,6 +123,7 @@ function creaTabellaTransazioni() {
               <td class="uscitaBudget">€${spesa.importo}</td>
           </tr>
       `;
+  uscite.push(spesa);
 }
 
 function inserimentoBudgetTabella() {
@@ -113,10 +145,18 @@ function inserimentoBudgetTabella() {
 }
 
 resetMese.addEventListener("click", () => {
-  creaPopup();
-})
+  if (
+    inputBudget.value == "" &&
+    descrizioneSpesa.value == "" &&
+    inputSpesa.value == ""
+  ) {
+    creaPopupCampiVuoti();
+  } else {
+    creaPopup();
+  }
+});
 
-function creaPopup(){
+function creaPopup() {
   const div = document.createElement("div");
   const h2 = document.createElement("h2");
   const sectionButtons = document.createElement("section");
@@ -144,15 +184,41 @@ function creaPopup(){
   btnGreen.addEventListener("click", () => {
     div.style.display = "none";
     body.classList.remove("popupBody");
-  })
-  btnRed.addEventListener("click", () =>{
+  });
+  btnRed.addEventListener("click", () => {
     svuotaCampi();
     div.style.display = "none";
     body.classList.remove("popupBody");
-  })
+  });
 }
 
-function svuotaCampi(){
+function creaPopupCampiVuoti() {
+  const div = document.createElement("div");
+  const h2 = document.createElement("h2");
+  const sectionButtons = document.createElement("section");
+  const btnGreen = document.createElement("button");
+  const body = document.querySelector("body");
+
+  h2.textContent = "Tutti i campi sono vuoti";
+  btnGreen.textContent = "Ok";
+
+  div.classList.add("popup");
+  h2.classList.add("h2Popup");
+  btnGreen.classList.add("btnGreenCampiVuoti");
+  body.classList.add("popupBody");
+
+  div.appendChild(h2);
+  div.appendChild(sectionButtons);
+  sectionButtons.appendChild(btnGreen);
+  popup.appendChild(div);
+
+  btnGreen.addEventListener("click", () => {
+    div.style.display = "none";
+    body.classList.remove("popupBody");
+  });
+}
+
+function svuotaCampi() {
   inputBudget.value = "";
   visualizzaBudget.textContent = 0 + " €";
   descrizioneSpesa.value = "";
@@ -160,4 +226,6 @@ function svuotaCampi(){
   usciteTotali.textContent = 0 + " €";
   visualizzaSaldo.textContent = 0 + " €";
   transazioni.textContent = "";
+  uscite = [];
+  localStorage.clear();
 }
