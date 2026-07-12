@@ -198,21 +198,21 @@ function creaPopupCampiVuoti() {
   const sectionButtons = document.createElement("section");
   const btnGreen = document.createElement("button");
   const body = document.querySelector("body");
-
+  
   h2.textContent = "Tutti i campi sono vuoti";
   btnGreen.textContent = "Ok";
-
+  
   div.classList.add("popup");
   h2.classList.add("h2Popup");
   sectionButtons.classList.add("sectionButtonCampiVuoti");
   btnGreen.classList.add("btnGreenCampiVuoti");
   body.classList.add("popupBody");
-
+  
   div.appendChild(h2);
   div.appendChild(sectionButtons);
   sectionButtons.appendChild(btnGreen);
   popup.appendChild(div);
-
+  
   btnGreen.addEventListener("click", () => {
     div.style.display = "none";
     body.classList.remove("popupBody");
